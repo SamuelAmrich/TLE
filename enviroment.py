@@ -29,7 +29,7 @@ print("Import complete")
 
 # Zakladne parametre ako cesty a listy
 
-path_ssd = "../../../../media/pi/asdf/"
+path_ssd = "../../../media/pi/asdf/"
 
 list_pos = [[48.57, 22.15],]
 
