@@ -29,10 +29,6 @@ print("Import complete")
 
 # Zakladne parametre ako cesty a listy
 
-path_camera = "../../allsky/"
-path_images_list = "../../allsky/images/"
-path_model = "../../Space_Lab/Neuronky/"
-path_results = "../../Space_Lab/Results/"
 path_ssd = "../../../../media/pi/asdf/"
 
 list_pos = [[48.57, 22.15],]
@@ -87,7 +83,7 @@ class weather:
 
     def sunset(self, lat, lon, url=url):
         return Requests.get(url.format(str(lat), str(lon))).json()["sys"]["sunset"]
-
+        
 # Opytame sa aky je cas
 
 
@@ -139,7 +135,7 @@ class chrono:
         name_of_image = "TLE-" + year + month + day + hour + minute + sec + typ
 
         return name_of_image
-
+        
 # Nadefinujeme si kreslenie
 
 
@@ -172,12 +168,12 @@ def plotHist_Basic(img):
 #         axs[i].set_xlabel(" ".join(["Intenzita signálu", colour]))
 #         axs[i].set_ylabel("Počet pixelov")
     return img
-
+    
 # Načítanie Cerberus modelu
 
 
 def model_Cerberus(path_model):
-    tleia_model_cerberus = Tf.keras.models.load_model(path_model+"tleia_model_cerberus.h5")
+    tleia_model_cerberus = Tf.keras.models.load_model("tleia_model_cerberus.h5")
 
     # Skompilovanie modelu a jeho sumarizacia Cerberus
 
@@ -194,7 +190,7 @@ def model_Cerberus(path_model):
 
 
 def model_Hydra(path_model):
-    tleia_model_hydra = tf.keras.models.load_model(path_model+"tleia_model_hydra.h5")
+    tleia_model_hydra = tf.keras.models.load_model("tleia_model_hydra.h5")
 
     # Skompilovanie modelu a jeho sumarizacia Hydra
 
@@ -229,7 +225,7 @@ def prepro(img):
     img = Np.expand_dims([img, img, img], axis=0)
     img = Np.swapaxes(img, 1, 3)
     return img
-
+    
 # Ulozi hodnoty fotky z kamery
 
 
@@ -239,7 +235,7 @@ def save_control_values(filename, settings):
         for k in sorted(settings.keys()):
             f.write('%s: %s\n' % (k, str(settings[k])))
     return settings
-
+    
 # spustenie kamery
 
 
@@ -273,7 +269,7 @@ def camera_start():
     camera.set_image_type(Asi.ASI_IMG_RAW16)
 
     return camera, controls
-
+    
 # Nastavujeme rozne mody
 
 # Snimanie TLE
@@ -322,7 +318,7 @@ def camera_setmode_manual(gain=None, Exposure=None):
 def camera_setmode_day():
     camera.set_control_value(Asi.ASI_GAIN, 0)
     camera.set_control_value(Asi.ASI_EXPOSURE, 100)
-
+    
 # urobi snimku z kamery
 
 
@@ -362,7 +358,7 @@ def camera_stop():
         print("Kamera sa zastavila")
     except:
         pass
-
+        
 # Ukonci vsetko
 
 
@@ -370,7 +366,7 @@ def end_of_service():
     camera_stop()
     print("Zastavil sa celý systém")
     # DtBETA
-
+    
 # Jendoduche zkontrastoavnie obrazka
 
 
@@ -387,7 +383,7 @@ def convert(image, bottom=1, top=99):
 
 def demo_bin(img):
     pass
-
+ 
 # Urobi maly jpeg
 
 
@@ -401,8 +397,8 @@ def thumbnail(img, path_ssd=path_ssd):
     img = img.resize(dim)
     img = img.save(path_ssd + filename)
     print("Fotka|", filename, "|uložila thumbnail")
+    
 
 camera, controls = camera_start()
 settings = save_control_values(path_ssd + "master-" + chrono.name(chrono), controls)
-
 
