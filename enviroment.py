@@ -400,5 +400,5 @@ def thumbnail(img, path_ssd=path_ssd):
     
 
 camera, controls = camera_start()
-settings = save_control_values(path_ssd + "master-" + chrono.name(chrono), controls)
+#settings = save_control_values(path_ssd + "master-" + chrono.name(chrono), controls)
 
