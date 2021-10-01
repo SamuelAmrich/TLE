@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import smtplib, ssl
-
+import time 
+time.sleep(10)
 smtp_server = "smtp.gmail.com"
 sender_email = "ikozmos99@gmail.com"
 receiver_email = "samuel.amrich@gmail.com" 
