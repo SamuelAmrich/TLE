@@ -1,5 +1,5 @@
 #!/bin/bash
 
-sudo python3 /home/pi/Space_Lab/Programs/reboot_mail.py
+sudo python3 /home/pi/TLE/reboot_mail.py
 
 exit 0
